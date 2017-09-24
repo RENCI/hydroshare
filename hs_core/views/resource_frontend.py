@@ -16,4 +16,9 @@ def resource_detail(request, short_id):
 
 
 def my_resources(request):
-    return render(request, template_name='nopages/my-resources.html', context={})
+    context = {
+        'user': request.user,
+        'my_resources': request.user.uaccess.owned_resources
+
+    }
+    return render(request, template_name='nopages/my-resources.html', context=context)
