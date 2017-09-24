@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ValidationError
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate, login as auth_login
+from django.contrib.auth import authenticate,logout as auth_logout, login as auth_login
 from django.views.generic import TemplateView
 from django.http import HttpResponse
 from django.shortcuts import redirect
@@ -37,22 +37,24 @@ from theme.utils import get_quota_message
 from .forms import SignupForm
 
 
+class HomePageView(TemplateView):
+    template_name = 'pages/homepage.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(HomePageView, self).get_context_data(**kwargs)
+        context['user'] = self.request.user
+        print(context)
+        import logging
+        logger = logging.getLogger(__name__)
+        logger.info(context)
+        logger.info(context['user'].is_anonymous())
+        return context
+
 class UserProfileView(TemplateView):
     template_name='accounts/profile.html'
 
-    def get_context_data(self, **kwargs):
-        if 'user' in kwargs:
-            try:
-                u = User.objects.get(pk=int(kwargs['user']))
-            except:
-                u = User.objects.get(username=kwargs['user'])
-
-        else:
-            try:
-                u = User.objects.get(pk=int(self.request.GET['user']))
-            except:
-                u = User.objects.get(username=self.request.GET['user'])
-
+    def get_context_data(self, user_id, **kwargs):
+        u = User.objects.get(pk=int(user_id))
         # get all resources the profile user owns
         resources = u.uaccess.owned_resources
         # get a list of groupmembershiprequests
@@ -121,7 +123,7 @@ def signup(request, template="accounts/account_signup.html", extra_context=None)
             new_user = form.save()
         except ValidationError as e:
             messages.error(request, e.message)
-            return HttpResponseRedirect(request.META['HTTP_REFERER'])
+            return HttpResponseRedirect(reverse('home'))
         else:
             if not new_user.is_active:
                 if settings.ACCOUNTS_APPROVAL_REQUIRED:
@@ -157,7 +159,7 @@ def signup(request, template="accounts/account_signup.html", extra_context=None)
     # return render(request, template, context)
 
     # This one keeps the css but not able to retained user entered data.
-    return HttpResponseRedirect(request.META['HTTP_REFERER'])
+    return HttpResponseRedirect(reverse('home'))
 
 
 @login_required
@@ -238,7 +240,7 @@ def update_user_profile(request):
     except Exception as ex:
         messages.error(request, ex.message)
 
-    return HttpResponseRedirect(request.META['HTTP_REFERER'])
+    return HttpResponseRedirect(reverse('profile', kwargs={'user_id':user.id}))
 
 
 def send_verification_mail_for_email_update(request, user, new_email, verification_type):
@@ -291,6 +293,11 @@ def login(request, template="accounts/account_login.html",
     return TemplateResponse(request, template, context)
 
 
+def logout(request):
+    auth_logout(request)
+    return HttpResponseRedirect(reverse('home'))
+
+
 def email_verify(request, new_email, uidb36=None, token=None):
     """
     View for the link in the verification email sent to a user
@@ -306,10 +313,10 @@ def email_verify(request, new_email, uidb36=None, token=None):
         auth_login(request, user)
         messages.info(request, _("Successfully updated email"))
         # redirect to user profile page
-        return HttpResponseRedirect('/user/{}/'.format(user.id))
+        return HttpResponseRedirect(reverse('profile', kwargs={'user_id':user.id}))
     else:
         messages.error(request, _("The link you clicked is no longer valid."))
-        return redirect("/")
+        return redirect(reverse('home'))
 
 
 @login_required
@@ -318,7 +325,7 @@ def deactivate_user(request):
     user.is_active = False
     user.save()
     messages.success(request, "Your account has been successfully deactivated.")
-    return HttpResponseRedirect('/accounts/logout/')
+    return HttpResponseRedirect(reverse('logout'))
 
 @login_required
 def delete_irods_account(request):

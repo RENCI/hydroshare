@@ -34,8 +34,8 @@ urlpatterns = i18n_patterns("",
     url(r'^tracking/reports/profiles/$', tracking.VisitorProfileReport.as_view(), name='tracking-report-profiles'),
     url(r'^tracking/reports/history/$', tracking.HistoryReport.as_view(), name='tracking-report-history'),
     url(r'^tracking/$', tracking.UseTrackingView.as_view(), name='tracking'),
-    url(r'^user/$', theme.UserProfileView.as_view()),
-    url(r'^user/(?P<user>.*)/', theme.UserProfileView.as_view()),
+    #url(r'^user/$', theme.UserProfileView.as_view()),
+    url(r'^user/(?P<user_id>\d*)/', theme.UserProfileView.as_view(), name='profile'),
     url(r'^comments/', include('django_comments.urls')),
     url(r'^rating/$', theme.rating),
     url(r'^profile/$', theme.update_user_profile, name='update_profile'),
@@ -43,6 +43,7 @@ urlpatterns = i18n_patterns("",
     url(r'^delete_irods_account/$', theme.delete_irods_account, name='delete_irods_account'),
     url(r'^create_irods_account/$', theme.create_irods_account, name='create_irods_account'),
     url(r'^accounts/login/$', theme.login, name='login'),
+    url(r'^accounts/logout/$', theme.logout, name='logout'),
     url(r'^email_verify/(?P<new_email>.*)/(?P<token>[-\w]+)/(?P<uidb36>[-\w]+)/', theme.email_verify,
         name='email_verify'),
     url(r'^verify/(?P<token>[0-9a-zA-Z:_\-]*)/', 'hs_core.views.verify'),
@@ -51,6 +52,7 @@ urlpatterns = i18n_patterns("",
     url(r'^search/$', hs_core_views.discovery_view.DiscoveryView.as_view(), name='haystack_search'),
     url(r'^searchjson/$', hs_core_views.discovery_json_view.DiscoveryJsonView.as_view(), name='haystack_json_search'),
     url(r'^rn/(?P<short_id>[A-z0-9\-_]+)', hs_core_views.resource_frontend.resource_detail, name='resource_detail'),
+    url(r'^my-resources/$', hs_core_views.resource_frontend.my_resources, name='my_resources'),
     url(r'^sitemap/$', 'hs_sitemap.views.sitemap', name='sitemap'),
     url(r'^collaborate/$', hs_core_views.CollaborateView.as_view(), name='collaborate'),
     url(r'^my-groups/$', hs_core_views.MyGroupsView.as_view(), name='my_groups'),
@@ -126,7 +128,7 @@ urlpatterns += patterns('',
     # "/.html" - so for this case, the template "pages/index.html"
     # should be used if you want to customize the homepage's template.
 
-    url("^$", TemplateView.as_view(template_name='pages/homepage.html'), name="home"),
+    url("^$", theme.HomePageView.as_view(), name="home"),
 
     # HOMEPAGE FOR A BLOG-ONLY SITE
     # -----------------------------
@@ -152,7 +154,7 @@ urlpatterns += patterns('',
     # ``mezzanine.urls``, go right ahead and take the parts you want
     # from it, and use them directly below instead of using
     # ``mezzanine.urls``.
-    ("^", include("mezzanine.urls")),
+    # ("^", include("mezzanine.urls")),
 
     # MOUNTING MEZZANINE UNDER A PREFIX
     # ---------------------------------

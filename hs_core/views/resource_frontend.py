@@ -13,3 +13,7 @@ def resource_detail(request, short_id):
         'res': base_resource,
     })
     return render(request, template_name='nopages/genericresource.html', context=context)
+
+
+def my_resources(request):
+    return render(request, template_name='nopages/my-resources.html', context={})

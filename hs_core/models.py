@@ -2722,6 +2722,9 @@ class BaseResource(Page, AbstractResource):
         else:
             return IrodsStorage()
 
+    def get_absolute_url(self):
+        reverse('resource_detail', kwargs={'short_id': self.short_id})
+
     @property
     def is_federated(self):
         return self.resource_federation_path is not None and \
