@@ -1087,26 +1087,22 @@ def add_generic_context(request, page):
         'user_zone_account_exist': user_zone_account_exist,
     }
 
-
-@login_required
-def create_resource_select_resource_type(request, *args, **kwargs):
-    return render_to_response('pages/create-resource.html', context_instance=RequestContext(request))
-
-
 @login_required
 def create_resource(request, *args, **kwargs):
-    # Note: This view function must be called by ajax
+    if not request.POST:
+        return render_to_response('pages/create-resource.html', context_instance=RequestContext(request))
 
-    ajax_response_data = {'status': 'error', 'message': ''}
     resource_type = request.POST['resource-type']
-    res_title = request.POST['title']
+    resource_title = request.POST['title']
     resource_files = request.FILES.values()
+
+
+    ### IRODS
     source_names = []
     irods_fnames = request.POST.get('irods_file_names')
     federated = request.POST.get("irods_federated").lower() == 'true'
     # TODO: need to make REST API consistent with internal API. This is just "move" now there.
     fed_copy_or_move = request.POST.get("copy-or-move")
-
     if irods_fnames:
         if federated:
             source_names = irods_fnames.split(',')
@@ -1129,10 +1125,10 @@ def create_resource(request, *args, **kwargs):
 
     url_key = "page_redirect_url"
     try:
-        _, res_title, metadata, fed_res_path = \
+        _, resource_title, metadata, fed_res_path = \
             hydroshare.utils.resource_pre_create_actions(resource_type=resource_type,
                                                          files=resource_files,
-                                                         resource_title=res_title,
+                                                         resource_title=resource_title,
                                                          source_names=source_names,
                                                          page_redirect_url_key=url_key,
                                                          requesting_user=request.user,
@@ -1140,27 +1136,31 @@ def create_resource(request, *args, **kwargs):
     except utils.ResourceFileSizeException as ex:
         ajax_response_data['message'] = ex.message
         return JsonResponse(ajax_response_data)
-
     except utils.ResourceFileValidationException as ex:
         ajax_response_data['message'] = ex.message
         return JsonResponse(ajax_response_data)
-
     except Exception as ex:
         ajax_response_data['message'] = ex.message
         return JsonResponse(ajax_response_data)
+    ### END IRODS
 
     resource = hydroshare.create_resource(
             resource_type=request.POST['resource-type'],
             owner=request.user,
-            title=res_title,
+            title=resource_title,
             metadata=metadata,
             files=resource_files,
             source_names=source_names,
             # TODO: should probably be resource_federation_path like it is set to.
             fed_res_path=fed_res_path[0] if len(fed_res_path) == 1 else '',
             move=(fed_copy_or_move == 'move'),
-            content=res_title
+            content=resource_title
     )
+    resource_url = reverse('resource_detail', kwargs={'short_id': resource.short_id})
+    ajax_response_data = {
+        'status': 'success',
+        'resource_url': resource_url,
+    }
 
     try:
         utils.resource_post_create_actions(request=request, resource=resource,
@@ -1168,17 +1168,12 @@ def create_resource(request, *args, **kwargs):
     except (utils.ResourceFileValidationException, Exception) as ex:
         request.session['validation_error'] = ex.message
         ajax_response_data['message'] = ex.message
-        ajax_response_data['status'] = 'success'
         ajax_response_data['file_upload_status'] = 'error'
-        ajax_response_data['resource_url'] = resource.get_absolute_url()
         return JsonResponse(ajax_response_data)
 
     request.session['just_created'] = True
-    if not ajax_response_data['message']:
-        if resource.files.all():
-            ajax_response_data['file_upload_status'] = 'success'
-        ajax_response_data['status'] = 'success'
-        ajax_response_data['resource_url'] = resource.get_absolute_url()
+    if resource.files.all():
+        ajax_response_data['file_upload_status'] = 'success'
 
     return JsonResponse(ajax_response_data)
 
