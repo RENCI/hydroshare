@@ -43,11 +43,6 @@ class HomePageView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super(HomePageView, self).get_context_data(**kwargs)
         context['user'] = self.request.user
-        print(context)
-        import logging
-        logger = logging.getLogger(__name__)
-        logger.info(context)
-        logger.info(context['user'].is_anonymous())
         return context
 
 class UserProfileView(TemplateView):
