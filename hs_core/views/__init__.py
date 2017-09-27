@@ -42,8 +42,6 @@ from .utils import authorize, upload_from_irods, ACTION_TO_AUTHORIZE, run_script
 from hs_core.models import GenericResource, resource_processor, CoreMetaData, Subject
 from hs_core.hydroshare.resource import METADATA_STATUS_SUFFICIENT, METADATA_STATUS_INSUFFICIENT
 
-from hs_core.hydroshare import utils
-
 from hs_core.signals import *
 from hs_access_control.models import PrivilegeCodes, GroupMembershipRequest, GroupResourcePrivilege
 
@@ -57,6 +55,7 @@ from . import error_handlers
 from . import resource_rest_api
 from . import resource_metadata_rest_api
 from . import user_rest_api
+from . import utils
 from . import resource_folder_hierarchy
 from . import resource_access_api
 from . import resource_frontend
@@ -74,6 +73,7 @@ __all__ = [
     'resource_metadata_rest_api',
     'resource_access_api',
     'user_rest_api',
+    'utils',
 ]
 
 
@@ -114,7 +114,7 @@ def change_quota_holder(request, shortkey):
     if not new_holder_u:
         return HttpResponseBadRequest()
 
-    res = utils.get_resource_by_shortkey(shortkey)
+    res = hydroshare.utils.get_resource_by_shortkey(shortkey)
     try:
         res.raccess.set_quota_holder(request.user, new_holder_u)
 
@@ -158,7 +158,7 @@ def add_files_to_resource(request, shortkey, *args, **kwargs):
             file_folder = file_folder[len("data/contents/"):]
 
     try:
-        utils.resource_file_add_pre_process(resource=resource, files=res_files, user=request.user,
+        hydroshare.utils.resource_file_add_pre_process(resource=resource, files=res_files, user=request.user,
                                             extract_metadata=extract_metadata,
                                             folder=file_folder)
 
@@ -595,7 +595,7 @@ def rep_res_bag_to_irods_user_zone(request, shortkey, *args, **kwargs):
         )
 
     try:
-        utils.replicate_resource_bag_to_user_zone(user, shortkey)
+        hydroshare.utils.replicate_resource_bag_to_user_zone(user, shortkey)
         return HttpResponse(
             json.dumps({"success": "This resource bag zip file has been successfully copied to your iRODS user zone."}),
             content_type = "application/json"
@@ -753,9 +753,9 @@ def _share_resource(request, shortkey, privilege, user_or_group_id, user_or_grou
     group_to_share_with = None
     status_code = 200
     if user_or_group == 'user':
-        user_to_share_with = utils.user_from_id(user_or_group_id)
+        user_to_share_with = hydroshare.utils.user_from_id(user_or_group_id)
     else:
-        group_to_share_with = utils.group_from_id(user_or_group_id)
+        group_to_share_with = hydroshare.utils.group_from_id(user_or_group_id)
 
     status = 'success'
     err_message = ''
@@ -827,7 +827,7 @@ def unshare_resource_with_user(request, shortkey, user_id, *args, **kwargs):
     """this view function is expected to be called by ajax"""
 
     res, _, user = authorize(request, shortkey, needed_permission=ACTION_TO_AUTHORIZE.VIEW_RESOURCE)
-    user_to_unshare_with = utils.user_from_id(user_id)
+    user_to_unshare_with = hydroshare.utils.user_from_id(user_id)
     ajax_response_data = {'status': 'success'}
     try:
         user.uaccess.unshare_resource_with_user(res, user_to_unshare_with)
@@ -846,7 +846,7 @@ def unshare_resource_with_group(request, shortkey, group_id, *args, **kwargs):
     """this view function is expected to be called by ajax"""
 
     res, _, user = authorize(request, shortkey, needed_permission=ACTION_TO_AUTHORIZE.VIEW_RESOURCE)
-    group_to_unshare_with = utils.group_from_id(group_id)
+    group_to_unshare_with = hydroshare.utils.group_from_id(group_id)
     ajax_response_data = {'status': 'success'}
     try:
         user.uaccess.unshare_resource_with_group(res, group_to_unshare_with)
@@ -864,7 +864,7 @@ def undo_share_resource_with_user(request, shortkey, user_id, *args, **kwargs):
     """this view function is expected to be called by ajax"""
 
     res, _, user = authorize(request, shortkey, needed_permission=ACTION_TO_AUTHORIZE.VIEW_RESOURCE)
-    user_to_unshare_with = utils.user_from_id(user_id)
+    user_to_unshare_with = hydroshare.utils.user_from_id(user_id)
     ajax_response_data = {'status': 'success'}
     try:
         user.uaccess.undo_share_resource_with_user(res, user_to_unshare_with)
@@ -894,7 +894,7 @@ def undo_share_resource_with_group(request, shortkey, group_id, *args, **kwargs)
     """this view function is expected to be called by ajax"""
 
     res, _, user = authorize(request, shortkey, needed_permission=ACTION_TO_AUTHORIZE.VIEW_RESOURCE)
-    group_to_unshare_with = utils.group_from_id(group_id)
+    group_to_unshare_with = hydroshare.utils.group_from_id(group_id)
     ajax_response_data = {'status': 'success'}
     try:
         user.uaccess.undo_share_resource_with_group(res, group_to_unshare_with)
@@ -1063,7 +1063,7 @@ def my_resources(request, page):
 @processor_for(GenericResource)
 def add_generic_context(request, page):
     user = request.user
-    in_production, user_zone_account_exist = utils.get_user_zone_status_info(user)
+    in_production, user_zone_account_exist = hydroshare.utils.get_user_zone_status_info(user)
 
     class AddUserForm(forms.Form):
         user = forms.ModelChoiceField(User.objects.filter(is_active=True).all(),
@@ -1110,7 +1110,7 @@ def create_resource(request, *args, **kwargs):
             try:
                 upload_from_irods(username=user, password=password, host=host, port=port,
                                   zone=zone, irods_fnames=irods_fnames, res_files=resource_files)
-            except utils.ResourceFileSizeException as ex:
+            except hydroshare.utils.ResourceFileSizeException as ex:
                 ajax_response_data['message'] = ex.message
                 return JsonResponse(ajax_response_data)
 
@@ -1128,10 +1128,10 @@ def create_resource(request, *args, **kwargs):
                                                          page_redirect_url_key=url_key,
                                                          requesting_user=request.user,
                                                          **kwargs)
-    except utils.ResourceFileSizeException as ex:
+    except hydroshare.utils.ResourceFileSizeException as ex:
         ajax_response_data['message'] = ex.message
         return JsonResponse(ajax_response_data)
-    except utils.ResourceFileValidationException as ex:
+    except hydroshare.utils.ResourceFileValidationException as ex:
         ajax_response_data['message'] = ex.message
         return JsonResponse(ajax_response_data)
     except Exception as ex:
@@ -1158,9 +1158,9 @@ def create_resource(request, *args, **kwargs):
     }
 
     try:
-        utils.resource_post_create_actions(request=request, resource=resource,
+        hydroshare.utils.resource_post_create_actions(request=request, resource=resource,
                                            user=request.user, metadata=metadata, **kwargs)
-    except (utils.ResourceFileValidationException, Exception) as ex:
+    except (hydroshare.utils.ResourceFileValidationException, Exception) as ex:
         request.session['validation_error'] = ex.message
         ajax_response_data['message'] = ex.message
         ajax_response_data['file_upload_status'] = 'error'
@@ -1196,7 +1196,7 @@ def create_user_group(request, *args, **kwargs):
 @login_required
 def update_user_group(request, group_id, *args, **kwargs):
     user = request.user
-    group_to_update = utils.group_from_id(group_id)
+    group_to_update = hydroshare.utils.group_from_id(group_id)
 
     if user.uaccess.can_change_group_flags(group_to_update):
         group_form = GroupUpdateForm(request.POST, request.FILES)
@@ -1246,8 +1246,8 @@ def restore_user_group(request, group_id, *args, **kwargs):
 @login_required
 def share_group_with_user(request, group_id, user_id, privilege, *args, **kwargs):
     requesting_user = request.user
-    group_to_share = utils.group_from_id(group_id)
-    user_to_share_with = utils.user_from_id(user_id)
+    group_to_share = hydroshare.utils.group_from_id(group_id)
+    user_to_share_with = hydroshare.utils.user_from_id(user_id)
     if privilege == 'view':
         access_privilege = PrivilegeCodes.VIEW
     elif privilege == 'edit':
@@ -1283,8 +1283,8 @@ def unshare_group_with_user(request, group_id, user_id, *args, **kwargs):
     :return:
     """
     requesting_user = request.user
-    group_to_unshare = utils.group_from_id(group_id)
-    user_to_unshare_with = utils.user_from_id(user_id)
+    group_to_unshare = hydroshare.utils.group_from_id(group_id)
+    user_to_unshare_with = hydroshare.utils.user_from_id(user_id)
 
     try:
         requesting_user.uaccess.unshare_group_with_user(group_to_unshare, user_to_unshare_with)
@@ -1314,10 +1314,10 @@ def make_group_membership_request(request, group_id, user_id=None, *args, **kwar
     :return:
     """
     requesting_user = request.user
-    group_to_join = utils.group_from_id(group_id)
+    group_to_join = hydroshare.utils.group_from_id(group_id)
     user_to_join = None
     if user_id is not None:
-        user_to_join = utils.user_from_id(user_id)
+        user_to_join = hydroshare.utils.user_from_id(user_id)
     try:
         membership_request = requesting_user.uaccess.create_group_membership_request(
             group_to_join, user_to_join)
@@ -1461,7 +1461,7 @@ def get_user_or_group_data(request, user_or_group_id, is_group, *args, **kwargs)
     """
     user_data = {}
     if is_group == 'false':
-        user = utils.user_from_id(user_or_group_id)
+        user = hydroshare.utils.user_from_id(user_or_group_id)
 
         if user.userprofile.middle_name:
             user_name = "{} {} {}".format(user.first_name, user.userprofile.middle_name, user.last_name)
@@ -1470,7 +1470,7 @@ def get_user_or_group_data(request, user_or_group_id, is_group, *args, **kwargs)
 
         user_data['name'] = user_name
         user_data['email'] = user.email
-        user_data['url'] = '{domain}/user/{uid}/'.format(domain=utils.current_site_url(), uid=user.pk)
+        user_data['url'] = '{domain}/user/{uid}/'.format(domain=hydroshare.utils.current_site_url(), uid=user.pk)
         if user.userprofile.phone_1:
             user_data['phone'] = user.userprofile.phone_1
         elif user.userprofile.phone_2:
@@ -1491,9 +1491,9 @@ def get_user_or_group_data(request, user_or_group_id, is_group, *args, **kwargs)
         user_data['organization'] = user.userprofile.organization if user.userprofile.organization else ''
         user_data['website'] = user.userprofile.website if user.userprofile.website else ''
     else:
-        group = utils.group_from_id(user_or_group_id)
+        group = hydroshare.utils.group_from_id(user_or_group_id)
         user_data['organization'] = group.name
-        user_data['url'] = '{domain}/user/{uid}/'.format(domain=utils.current_site_url(),
+        user_data['url'] = '{domain}/user/{uid}/'.format(domain=hydroshare.utils.current_site_url(),
                                                          uid=group.pk)
         user_data['description'] = group.gaccess.description
 
