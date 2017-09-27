@@ -17,7 +17,8 @@ xdcishare-solr:
     - "HS_PATH:/hydroshare"
   ports:
     - "8983"
-  command: [sh, -c, /bin/bash /opt/xdcishare-solr/bin/solr -f]
+  # command: [sh, -c, /bin/bash /opt/xdcishare-solr/bin/solr -f]
+  command: ["/bin/bash", "-c", "/opt/solr/bin/solr -f"]
 xdcishare:
   build: .
   container_name: xdcishare 

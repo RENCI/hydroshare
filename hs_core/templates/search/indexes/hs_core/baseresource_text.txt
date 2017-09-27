@@ -134,11 +134,6 @@
 {% for editor in object.raccess.edit_users.all %}
     {{ editor.first_name }} {{editor.last_name}}
 {% endfor %}
-{% for comment in object.comments.all %}
-    {% if comment %} 
-        {{ comment }}
-    {% endif %} 
-{% endfor %}
 {% if object.metadata.geometryinformation.geometryType  %}
     {{ object.metadata.geometryinformation.geometryType }}
 {% endif %}

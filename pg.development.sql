@@ -100,6 +100,27 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
+-- Name: auth_user; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE auth_user (
+    id integer NOT NULL,
+    password character varying(128) NOT NULL,
+    last_login timestamp with time zone,
+    is_superuser boolean NOT NULL,
+    username character varying(30) NOT NULL,
+    first_name character varying(30) NOT NULL,
+    last_name character varying(30) NOT NULL,
+    email character varying(254) NOT NULL,
+    is_staff boolean NOT NULL,
+    is_active boolean NOT NULL,
+    date_joined timestamp with time zone NOT NULL
+);
+
+
+ALTER TABLE auth_user OWNER TO postgres;
+
+--
 -- Name: auth_group; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -200,27 +221,6 @@ ALTER TABLE auth_permission_id_seq OWNER TO postgres;
 
 ALTER SEQUENCE auth_permission_id_seq OWNED BY auth_permission.id;
 
-
---
--- Name: auth_user; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
---
-
-CREATE TABLE auth_user (
-    id integer NOT NULL,
-    password character varying(128) NOT NULL,
-    last_login timestamp with time zone,
-    is_superuser boolean NOT NULL,
-    username character varying(30) NOT NULL,
-    first_name character varying(30) NOT NULL,
-    last_name character varying(30) NOT NULL,
-    email character varying(254) NOT NULL,
-    is_staff boolean NOT NULL,
-    is_active boolean NOT NULL,
-    date_joined timestamp with time zone NOT NULL
-);
-
-
-ALTER TABLE auth_user OWNER TO postgres;
 
 --
 -- Name: auth_user_groups; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 

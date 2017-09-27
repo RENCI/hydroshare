@@ -272,7 +272,7 @@ update_solr_index() {
 rebuild_solr_index() {
     echo "REBUILD SOLR INDEX:"
     echo "  - docker exec xdcishare python manage.py rebuild_index --noinput"
-    docker exec dcishare python manage.py rebuild_index --noinput
+    docker exec xdcishare python manage.py rebuild_index --noinput
 }
 
 remove_hs_components(){
