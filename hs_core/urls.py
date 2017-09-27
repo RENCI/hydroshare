@@ -30,7 +30,7 @@ urlpatterns = patterns('',
         name='new_version_resource_public'),
 
     # public copy resource endpoint
-    url(r'^resource/(?P<pk>[0-9a-f-]+)/copy/$', views.copy_resource_public, name='copy_resource_public'),
+    url(r'^resource/(?P<short_id>[0-9a-f-]+)/copy/$', views.copy_resource, name='copy_resource_public'),
 
     # DEPRECATED: use form above instead
     url(r'^resource/accessRules/(?P<pk>[0-9a-f-]+)/$', views.resource_rest_api.AccessRulesUpdate.as_view(),
@@ -131,7 +131,7 @@ urlpatterns = patterns('',
         views.delete_resource, name='delete_resource'),
     url(r'^_internal/(?P<shortkey>[0-9a-f-]+)/create-new-version-resource/$',
         views.create_new_version_resource, name='create_resource_version'),
-    url(r'^_internal/(?P<shortkey>[0-9a-f-]+)/copy-resource/$', views.copy_resource,
+    url(r'^_internal/(?P<short_id>[0-9a-f-]+)/copy-resource/$', views.copy_resource,
         name='copy_resource'),
     url(r'^_internal/(?P<shortkey>[0-9a-f-]+)/rep-res-bag-to-irods-user-zone/$',
         views.rep_res_bag_to_irods_user_zone, name='replicate_bag_user_zone'),

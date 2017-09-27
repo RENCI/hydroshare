@@ -607,12 +607,13 @@ def rep_res_bag_to_irods_user_zone(request, shortkey, *args, **kwargs):
         )
 
 
-def copy_resource(request, shortkey, *args, **kwargs):
-    res, authorized, user = authorize(request, shortkey,
+@api_view(['POST'])
+def copy_resource(request, short_id):
+    res, authorized, user = authorize(request, short_id,
                                       needed_permission=ACTION_TO_AUTHORIZE.VIEW_RESOURCE)
     new_resource = None
     try:
-        new_resource = hydroshare.create_empty_resource(shortkey, user, action='copy')
+        new_resource = hydroshare.create_empty_resource(short_id, user, action='copy')
         new_resource = hydroshare.copy_resource(res, new_resource)
     except Exception as ex:
         if new_resource:
@@ -623,17 +624,11 @@ def copy_resource(request, shortkey, *args, **kwargs):
     # go to resource landing page
     request.session['just_created'] = True
     request.session['just_copied'] = True
-    return HttpResponseRedirect(new_resource.get_absolute_url())
-
-
-@api_view(['POST'])
-def copy_resource_public(request, pk):
-    response = copy_resource(request, pk)
-    return HttpResponse(response.url.split('/')[2], status=202)
+    return HttpResponse(new_resource.short_id, status=202)
 
 
 def create_new_version_resource(request, shortkey, *args, **kwargs):
-    res, authorized, user = authorize(request, shortkey,
+    res, authorized, user = authorize(request, short_id,
                                       needed_permission=ACTION_TO_AUTHORIZE.CREATE_RESOURCE_VERSION)
 
     if res.locked_time:
