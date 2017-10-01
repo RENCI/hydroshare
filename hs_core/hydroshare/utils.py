@@ -693,7 +693,7 @@ def validate_user_quota(user, size):
     """
     if user:
         # validate it is within quota hard limit
-        uq = user.quotas.filter(zone='hydroshare_internal').first()
+        uq = user.quotas.filter(zone=settings.XDCI_ZONE).first()
         if uq:
             if not QuotaMessage.objects.exists():
                 QuotaMessage.objects.create()
@@ -708,7 +708,8 @@ def validate_user_quota(user, size):
                                                   unit=uq.unit,
                                                   allocated=uq.allocated_value,
                                                   zone=uq.zone,
-                                                  percent=used_percent)
+                                                  percent=used_percent,
+                                                  email=settings.XDCI_SUPPORT_EMAIL)
                 raise QuotaException(msg_str)
 
 
