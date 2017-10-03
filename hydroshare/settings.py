@@ -249,10 +249,10 @@ INPLACE_SAVE_URL = '/hsapi/save_inline/'
 ################
 
 INSTALLED_APPS = (
+    "django.contrib.auth",
     'test_without_migrations',
     "autocomplete_light",
     "django.contrib.admin",
-    "django.contrib.auth",
     "oauth2_provider",
     "corsheaders",
     "django.contrib.contenttypes",
@@ -471,7 +471,6 @@ local_settings = __import__(local_settings_module, globals(), locals(), ['*'])
 for k in dir(local_settings):
     locals()[k] = getattr(local_settings, k)
 
-
 ####################
 # DYNAMIC SETTINGS #
 ####################
@@ -503,7 +502,7 @@ REST_FRAMEWORK = {
     ),
 }
 
-SOLR_HOST = os.environ.get('SOLR_PORT_8983_TCP_ADDR', 'localhost')
+SOLR_HOST = os.environ.get('XDCISHARE_SOLR_PORT_8983_TCP_ADDR', 'localhost')
 SOLR_PORT = '8983'
 HAYSTACK_CONNECTIONS = {
     'default': {
