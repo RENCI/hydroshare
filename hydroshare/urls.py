@@ -14,6 +14,7 @@ from theme import views as theme
 from hs_tracking import views as tracking
 import hs_core.views as hs_core_views
 from hs_app_timeseries import views as hs_ts_views
+from hs_app_netCDF import views as nc_views
 
 
 autocomplete_light.autodiscover()
@@ -60,9 +61,11 @@ urlpatterns = i18n_patterns("",
 
     url(r'^timeseries/sqlite/update/(?P<resource_id>[A-z0-9\-_]+)', hs_ts_views.update_sqlite_file, name='update_sqlite_file'),
 
+    url('^hsapi/', include('hs_rest_api.urls')),
     url('^hsapi/', include('hs_core.urls')),
     url('', include('hs_core.resourcemap_urls')),
     url('', include('hs_core.metadata_terms_urls')),
+    url('', include('hs_core.debug_urls')),
     url('^hsapi/', include('ref_ts.urls')),
     url('^irods/', include('irods_browser_app.urls')),
     url('^hs_metrics/', include('hs_metrics.urls')),
@@ -77,7 +80,7 @@ urlpatterns = i18n_patterns("",
     url(r'^tracking/reports/profiles/$', tracking.VisitorProfileReport.as_view(), name='tracking-report-profiles'),
     url(r'^tracking/reports/history/$', tracking.HistoryReport.as_view(), name='tracking-report-history'),
     url(r'^tracking/$', tracking.UseTrackingView.as_view(), name='tracking'),
-
+    url(r'^tracking/applaunch/', tracking.AppLaunch.as_view(), name='tracking-applaunch'),
 
     url("^", include("mezzanine.urls")),
 )

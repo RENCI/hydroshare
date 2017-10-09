@@ -263,6 +263,7 @@ INSTALLED_APPS = (
     "django.contrib.staticfiles",
     "django.contrib.gis",
     "django.contrib.postgres",
+    "rest_framework_swagger",
     "inplaceeditform",
     "django_nose",
     "django_irods",
@@ -305,6 +306,7 @@ INSTALLED_APPS = (
     "hs_tracking",
     "hs_file_types",
     "hs_composite_resource",
+    "hs_rest_api",
     "django_comments",
     "security",
 )
@@ -709,3 +711,7 @@ SECURE_HSTS_SECONDS = 31536000
 # Cookie Stuff
 SESSION_COOKIE_SECURE = USE_SECURITY
 CSRF_COOKIE_SECURE = USE_SECURITY
+
+SWAGGER_SETTINGS = {
+    "VALIDATOR_URL": False
+}

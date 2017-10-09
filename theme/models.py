@@ -151,41 +151,41 @@ class QuotaMessage(models.Model):
     # enforce_content_prepend prepends the content to form an enforcement message to inform users
     # after grace period or when they are over hard limit quota
     warning_content_prepend = models.TextField(default=('Your quota for {s_name} resources is '
-                                                        '{{allocated}}{{unit}} in {{zone}} zone. You '
-                                                        'currently have resources that consume '
-                                                        '{{used}}{{unit}}, {{percent}}% of your quota. '
-                                                        'Once your quota reaches 100% you will no '
-                                                        'longer be able to create new resources in '
-                                                        '{s_name}. '
-                                                       ).format(s_name=settings.XDCI_SITE_NAME_MIXED))
+                                                       '{{allocated}}{{unit}} in {{zone}} zone. You '
+                                                       'currently have resources that consume '
+                                                       '{{used}}{{unit}}, {{percent}}% of your quota. '
+                                                       'Once your quota reaches 100% you will no '
+                                                       'longer be able to create new resources in '
+                                                       '{s_name}. '
+                                                        ).format(s_name=settings.XDCI_SITE_NAME_MIXED))
     grace_period_content_prepend = models.TextField(default=('You have exceeded your {s_name} '
-                                                             'quota. Your quota for {s_name} '
-                                                             'resources is {{allocated}}{{unit}} in '
-                                                             '{{zone}} zone. You currently have '
-                                                             'resources that consume {{used}}{{unit}}, '
-                                                             '{{percent}}% of your quota. You have a '
-                                                             'grace period until {{cut_off_date}} to '
-                                                             'reduce your use to below your quota, '
-                                                             'or to acquire additional quota, after '
-                                                             'which you will no longer be able to '
-                                                             'create new resources in {s_name}. '
-                                                            ).format(s_name=settings.XDCI_SITE_NAME_MIXED))
-    enforce_content_prepend = models.TextField(default=('Your action to add content to {s_name} '
-                                                        'was refused because you have exceeded your '
-                                                        'quota. Your quota for {s_name} resources '
-                                                        'is {{allocated}}{{unit}} in {{zone}} zone. You '
-                                                        'currently have resources that consume '
-                                                        '{{used}}{{unit}}, {{percent}}% of your quota. '
-                                                       ).format(s_name=settings.XDCI_SITE_NAME_MIXED))
+                                                            'quota. Your quota for {s_name} '
+                                                            'resources is {{allocated}}{{unit}} in '
+                                                            '{{zone}} zone. You currently have '
+                                                            'resources that consume {{used}}{{unit}}, '
+                                                            '{{percent}}% of your quota. You have a '
+                                                            'grace period until {{cut_off_date}} to '
+                                                            'reduce your use to below your quota, '
+                                                            'or to acquire additional quota, after '
+                                                            'which you will no longer be able to '
+                                                            'create new resources in {s_name}. '
+                                                    ).format(s_name=settings.XDCI_SITE_NAME_MIXED))
+    enforce_content_prepend = models.TextField(default=('Your action '
+                                                       'was refused because you have exceeded your '
+                                                       'quota. Your quota for {s_name} resources '
+                                                       'is {{allocated}}{{unit}} in {{zone}} zone. You '
+                                                       'currently have resources that consume '
+                                                       '{{used}}{{unit}}, {{percent}}% of your quota. '
+                                                        ).format(s_name=settings.XDCI_SITE_NAME_MIXED))
     content = models.TextField(default=('To request additional quota, please contact '
-                                        '{{email}}. We will try to accommodate '
-                                        'reasonable requests for additional quota. If you have a '
-                                        'large quota request you may need to contribute toward the '
-                                        'costs of providing the additional space you need. See '
-                                        'https://{pages}/{about}/policies/'
-                                        'quota/ for more information about the quota policy.'
-                                       ).format(pages=settings.XDCI_PAGES_DOMAIN_NAME,
-                                                about=settings.XDCI_ABOUT_PATH))
+                                       '{{email}}. We will try to accommodate '
+                                       'reasonable requests for additional quota. If you have a '
+                                       'large quota request you may need to contribute toward the '
+                                       'costs of providing the additional space you need. See '
+                                       'https://{pages}/{about}/policies/'
+                                       'quota/ for more information about the quota policy.'
+                                        ).format(pages=settings.XDCI_PAGES_DOMAIN_NAME,
+                                                 about=settings.XDCI_ABOUT_PATH))
     # quota soft limit percent value for starting to show quota usage warning. Default is 80%
     soft_limit_percent = models.IntegerField(default=80)
     # quota hard limit percent value for hard quota enforcement. Default is 125%
@@ -207,8 +207,8 @@ class UserQuota(models.Model):
                              related_name='quotas',
                              related_query_name='quotas')
 
-    allocated_value = models.BigIntegerField(default=20)
-    used_value = models.BigIntegerField(default=0)
+    allocated_value = models.FloatField(default=20)
+    used_value = models.FloatField(default=0)
     unit = models.CharField(max_length=10, default="GB")
     zone = models.CharField(max_length=100, default=settings.XDCI_ZONE)
     # remaining_grace_period to be quota-enforced. Default is -1 meaning the user is below
@@ -219,6 +219,31 @@ class UserQuota(models.Model):
         verbose_name = _("User quota")
         verbose_name_plural = _("User quotas")
         unique_together = ('user', 'zone')
+
+    @property
+    def used_percent(self):
+        return self.used_value*100.0/self.allocated_value
+
+    def update_used_value(self, size):
+        """
+        set self.used_value in self.unit with pass in size in bytes.
+        :param size: pass in size in bytes unit
+        :return:
+        """
+        from hs_core.hydroshare.utils import convert_file_size_to_unit
+        self.used_value = convert_file_size_to_unit(size, self.unit)
+        self.save()
+
+    def add_to_used_value(self, size):
+        """
+        return summation of used_value and pass in size in bytes. The returned value
+        is in unit specified by self.unit
+        :param size: pass in size in bytes unit
+        :return: summation of self.used_value and pass in size, converted to the same self.unit
+        """
+        from hs_core.hydroshare.utils import convert_file_size_to_unit
+        return self.used_value + convert_file_size_to_unit(size, self.unit)
+
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User)

@@ -100,7 +100,7 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
--- Name: auth_user; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+-- Name: auth_user; Type: TABLE; Schema: public; Owner: postgres; Tablespace:
 --
 
 CREATE TABLE auth_user (
@@ -2312,7 +2312,7 @@ ALTER SEQUENCE hs_access_control_groupresourceprivilege_id_seq OWNED BY hs_acces
 
 
 --
--- Name: hs_access_control_groupresourceprovenance; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+-- Name: hs_access_control_groupresourceprovenance; Type: TABLE; Schema: public; Owner: postgres; Tablespace:
 --
 
 CREATE TABLE hs_access_control_groupresourceprovenance (
@@ -2459,7 +2459,7 @@ ALTER SEQUENCE hs_access_control_usergroupprivilege_id_seq OWNED BY hs_access_co
 
 
 --
--- Name: hs_access_control_usergroupprovenance; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+-- Name: hs_access_control_usergroupprovenance; Type: TABLE; Schema: public; Owner: postgres; Tablespace:
 --
 
 CREATE TABLE hs_access_control_usergroupprovenance (
@@ -2534,7 +2534,7 @@ ALTER SEQUENCE hs_access_control_userresourceprivilege_id_seq OWNED BY hs_access
 
 
 --
--- Name: hs_access_control_userresourceprovenance; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+-- Name: hs_access_control_userresourceprovenance; Type: TABLE; Schema: public; Owner: postgres; Tablespace:
 --
 
 CREATE TABLE hs_access_control_userresourceprovenance (
@@ -4345,7 +4345,7 @@ ALTER SEQUENCE hs_file_types_georasterlogicalfile_id_seq OWNED BY hs_file_types_
 
 
 --
--- Name: hs_file_types_netcdffilemetadata; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+-- Name: hs_file_types_netcdffilemetadata; Type: TABLE; Schema: public; Owner: postgres; Tablespace:
 --
 
 CREATE TABLE hs_file_types_netcdffilemetadata (
@@ -4380,7 +4380,7 @@ ALTER SEQUENCE hs_file_types_netcdffilemetadata_id_seq OWNED BY hs_file_types_ne
 
 
 --
--- Name: hs_file_types_netcdflogicalfile; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+-- Name: hs_file_types_netcdflogicalfile; Type: TABLE; Schema: public; Owner: postgres; Tablespace:
 --
 
 CREATE TABLE hs_file_types_netcdflogicalfile (
@@ -6411,7 +6411,7 @@ CREATE TABLE hs_tracking_variable (
     "timestamp" timestamp with time zone NOT NULL,
     name character varying(32) NOT NULL,
     type integer NOT NULL,
-    value character varying(500) NOT NULL,
+    value text NOT NULL,
     session_id integer NOT NULL
 );
 
@@ -7106,7 +7106,7 @@ ALTER SEQUENCE robots_url_id_seq OWNED BY robots_url.id;
 
 
 --
--- Name: security_cspreport; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+-- Name: security_cspreport; Type: TABLE; Schema: public; Owner: postgres; Tablespace:
 --
 
 CREATE TABLE security_cspreport (
@@ -7146,7 +7146,7 @@ ALTER SEQUENCE security_cspreport_id_seq OWNED BY security_cspreport.id;
 
 
 --
--- Name: security_passwordexpiry; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+-- Name: security_passwordexpiry; Type: TABLE; Schema: public; Owner: postgres; Tablespace:
 --
 
 CREATE TABLE security_passwordexpiry (
@@ -7247,7 +7247,7 @@ ALTER SEQUENCE theme_iconbox_id_seq OWNED BY theme_iconbox.id;
 
 
 --
--- Name: theme_quotamessage; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+-- Name: theme_quotamessage; Type: TABLE; Schema: public; Owner: postgres; Tablespace:
 --
 
 CREATE TABLE theme_quotamessage (
@@ -7385,7 +7385,7 @@ ALTER SEQUENCE theme_userprofile_id_seq OWNED BY theme_userprofile.id;
 
 
 --
--- Name: theme_userquota; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+-- Name: theme_userquota; Type: TABLE; Schema: public; Owner: postgres; Tablespace:
 --
 
 CREATE TABLE theme_userquota (
@@ -10708,17 +10708,20 @@ COPY django_migrations (id, app, name, applied) FROM stdin;
 170	hs_access_control	0019_manual_populate_provenance	2017-05-05 13:41:50.933487+00
 171	hs_access_control	0017_groupaccess_auto_approve	2017-05-05 13:41:51.095253+00
 172	hs_access_control	0020_merge	2017-05-05 13:41:51.098691+00
-173	hs_app_netCDF	0007_netcdfmetadata_is_dirty	2017-05-05 13:41:51.129644+00
-174	hs_core	0033_resourcefile_attributes	2017-05-05 13:41:51.717935+00
-175	hs_core	0034_manual_migrate_file_paths	2017-05-05 13:41:51.736427+00
-176	hs_core	0035_remove_deprecated_fields	2017-05-05 13:41:52.095568+00
-177	hs_file_types	0002_auto_20170216_1904	2017-05-05 13:41:52.203428+00
-178	hs_file_types	0003_auto_20170302_2257	2017-05-05 13:41:52.285303+00
-179	hs_tools_resource	0011_toolicon_data_url	2017-05-05 13:41:52.958208+00
-180	security	0001_initial	2017-05-05 13:41:53.970416+00
-181	theme	0005_userquota	2017-05-05 13:41:55.396172+00
-182	theme	0006_auto_20170309_1516	2017-05-05 13:41:55.432509+00
-183	theme	0007_auto_20170427_1553	2017-05-05 13:41:57.537779+00
+173	hs_access_control	0021_auto_20170506_1538	2017-05-18 23:34:12.571445+00
+174	hs_app_netCDF	0007_netcdfmetadata_is_dirty	2017-05-05 13:41:51.129644+00
+175	hs_core	0033_resourcefile_attributes	2017-05-05 13:41:51.717935+00
+176	hs_core	0034_manual_migrate_file_paths	2017-05-05 13:41:51.736427+00
+177	hs_core	0035_remove_deprecated_fields	2017-05-05 13:41:52.095568+00
+178	hs_file_types	0002_auto_20170216_1904	2017-05-05 13:41:52.203428+00
+179	hs_file_types	0003_auto_20170302_2257	2017-05-05 13:41:52.285303+00
+180	hs_script_resource	0002_repo_charfield_to_urlfield	2017-05-18 23:34:14.684829+00
+181	hs_tools_resource	0011_toolicon_data_url	2017-05-05 13:41:52.958208+00
+182	hs_tracking	0005_auto_20170506_1538	2017-05-18 23:34:15.545637+00
+183	security	0001_initial	2017-05-05 13:41:53.970416+00
+184	theme	0005_userquota	2017-05-05 13:41:55.396172+00
+185	theme	0006_auto_20170309_1516	2017-05-05 13:41:55.432509+00
+186	theme	0007_auto_20170427_1553	2017-05-05 13:41:57.537779+00
 \.
 
 
@@ -10726,7 +10729,7 @@ COPY django_migrations (id, app, name, applied) FROM stdin;
 -- Name: django_migrations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('django_migrations_id_seq', 183, true);
+SELECT pg_catalog.setval('django_migrations_id_seq', 186, true);
 
 
 --
@@ -10755,6 +10758,7 @@ yq96gavkvlu0skywfwgvdock65xnq3tc	ZTIwZWRiZTQzZjI5ODhkYTE0NDQxYzFmZmQzMTRjZDc3MWU
 5eflr6q0pn7qgkuu6mbo84kuqoxk5plt	ZjZmMTlkMThkOGJmNWIzY2IxODNjODM5ZTA2MmFjNTRmNTlmYTRkOTp7InF1ZXJ5X2NoYW5nZWQiOmZhbHNlLCJoc190cmFja2luZ19pZCI6ImV5SnBaQ0k2TW4wOjFiRzg2ZDpGNWs4M3pGcnQ2Mzg5WWMyZUhRc3BNRGVBR2siLCJmYWNldHNfaXRlbXMiOnsiZmllbGRzIjp7ImF1dGhvciI6W10sIm93bmVyc19uYW1lcyI6W10sInN1YmplY3RzIjpbXSwiZGlzY292ZXJhYmxlIjpbXSwicHVibGljIjpbXSwicmVzb3VyY2VfdHlwZSI6W119LCJkYXRlcyI6e30sInF1ZXJpZXMiOnt9fSwidG90YWxfcmVzdWx0cyI6MH0=	2016-07-07 17:17:57.67608+00
 yg9nko1xsebjvcc6wk4ynygw4m8l3ofk	ZTg1M2RhMWVmMzk3YTcwYTFlMWE5MDhlNWRiYjAyZGU0Yzk2YmVmYzp7ImhzX3RyYWNraW5nX2lkIjoiZXlKcFpDSTZObjA6MWNaTEJZOnhCdHhZT3oxQ3RXb0lBVFR2aFVqcW5UaDBwOCJ9	2017-02-16 17:28:40.816975+00
 sbfc9qcoi728qf2c38jscng5q7ccra4a	ZWI2ZjgwZmQ3NmRhYTA3NDAyYzI4MzEyMzgwMjNmMGExODU3ZjNhMzp7ImhzX3RyYWNraW5nX2lkIjoiZXlKcFpDSTZOMzA6MWQ2ZFdIOmx4S0hCN1NrVWgwS3NaT2tqSHVEVndhMGcxbyIsIl9hdXRoX3VzZXJfaGFzaCI6IjBjZGYxNDBkN2Q1NDRhMGUyMWMwM2EyMTdjMDJlNGQyMjFhZjhiYTUiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJtZXp6YW5pbmUuY29yZS5hdXRoX2JhY2tlbmRzLk1lenphbmluZUJhY2tlbmQiLCJfYXV0aF91c2VyX2lkIjoiNCJ9	2017-05-19 13:43:51.032176+00
+mtzyl7dumuj30g4jb8tmyf7scec5ni6y	MmQ4MTVjNDgwY2RlOGVkY2JkZGIyMWU3NzFkMDY4N2JjYmFmMzEyZjp7ImhzX3RyYWNraW5nX2lkIjoiZXlKcFpDSTZOMzA6MWRCVjBMOlFXNHRRWmpRR0xvendJZVJUNUliMWI4YkhvVSJ9	2017-06-01 23:38:49.600605+00
 \.
 
 
@@ -12846,7 +12850,6 @@ COPY hs_tracking_session (id, begin, visitor_id) FROM stdin;
 4	2017-02-02 17:23:27.983199+00	1
 5	2017-02-02 17:27:56.526549+00	1
 6	2017-02-02 17:28:40.81141+00	6
-7	2017-05-05 13:43:41.852248+00	1
 \.
 
 
@@ -12854,7 +12857,7 @@ COPY hs_tracking_session (id, begin, visitor_id) FROM stdin;
 -- Name: hs_tracking_session_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('hs_tracking_session_id_seq', 7, true);
+SELECT pg_catalog.setval('hs_tracking_session_id_seq', 6, true);
 
 
 --
@@ -12938,223 +12941,6 @@ COPY hs_tracking_variable (id, "timestamp", name, type, value, session_id) FROM 
 74	2017-02-02 17:28:40.710661+00	logout	4	none	5
 75	2017-02-02 17:28:40.81281+00	begin_session	4	none	6
 76	2017-02-02 17:28:40.814548+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=None user_email_domain=None request_url=/	6
-77	2017-05-05 13:43:41.853727+00	begin_session	2	user_ip=192.168.56.1 user_type=None user_email_domain=None	7
-78	2017-05-05 13:43:41.855266+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=None user_email_domain=None request_url=/	7
-79	2017-05-05 13:43:45.585703+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=None user_email_domain=None request_url=/accounts/login/	7
-80	2017-05-05 13:43:51.029905+00	login	2	user_ip=192.168.56.1 user_type=Unspecified user_email_domain=com	7
-81	2017-05-05 13:43:51.133028+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/	7
-82	2017-05-05 13:44:00.211724+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/	7
-83	2017-05-05 13:44:05.248595+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/pages/page/	7
-84	2017-05-05 13:44:05.303099+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/jsi18n/	7
-85	2017-05-05 13:44:08.980437+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/theme/homepage/2/	7
-86	2017-05-05 13:44:09.03879+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/jsi18n/	7
-87	2017-05-05 13:44:48.768412+00	visit	2	user_ip=192.168.56.1 http_method=POST http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin_keywords_submit/	7
-88	2017-05-05 13:44:49.032345+00	visit	2	user_ip=192.168.56.1 http_method=POST http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/theme/homepage/2/	7
-89	2017-05-05 13:44:49.080507+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/jsi18n/	7
-90	2017-05-05 13:47:22.753596+00	visit	2	user_ip=192.168.56.1 http_method=POST http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin_keywords_submit/	7
-91	2017-05-05 13:47:23.105793+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/pages/page/	7
-92	2017-05-05 13:47:23.168256+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/jsi18n/	7
-93	2017-05-05 13:47:27.280254+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/pages/richtextpage/3/	7
-94	2017-05-05 13:47:27.34037+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/jsi18n/	7
-95	2017-05-05 13:47:48.585224+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/pages/page/	7
-96	2017-05-05 13:47:59.344877+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/pages/richtextpage/4/	7
-97	2017-05-05 13:47:59.405058+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/jsi18n/	7
-98	2017-05-05 13:48:13.538811+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/pages/page/	7
-99	2017-05-05 13:48:13.586145+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/jsi18n/	7
-100	2017-05-05 13:48:18.744687+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/pages/richtextpage/4/	7
-101	2017-05-05 13:48:18.798374+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/jsi18n/	7
-102	2017-05-05 13:48:29.287553+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/pages/page/	7
-103	2017-05-05 13:48:29.34512+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/jsi18n/	7
-104	2017-05-05 13:48:32.489829+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/theme/homepage/2/	7
-105	2017-05-05 13:48:32.543173+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/jsi18n/	7
-106	2017-05-05 13:49:03.739814+00	visit	2	user_ip=192.168.56.1 http_method=POST http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin_keywords_submit/	7
-107	2017-05-05 13:49:04.092741+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/pages/page/	7
-108	2017-05-05 13:49:04.147509+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/jsi18n/	7
-109	2017-05-05 13:49:08.788916+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/theme/homepage/2/	7
-110	2017-05-05 13:49:15.98142+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/pages/page/	7
-111	2017-05-05 13:49:16.663399+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/pages/richtextpage/4/	7
-112	2017-05-05 13:49:17.547584+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/pages/page/	7
-113	2017-05-05 13:49:18.242485+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/pages/richtextpage/4/	7
-114	2017-05-05 13:49:19.187231+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/pages/page/	7
-115	2017-05-05 13:49:30.619389+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/pages/page/	7
-116	2017-05-05 13:49:35.672673+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/pages/page/	7
-117	2017-05-05 13:49:35.711799+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/jsi18n/	7
-118	2017-05-05 13:49:38.329731+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/	7
-119	2017-05-05 13:49:58.739124+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/pages/page/	7
-120	2017-05-05 13:49:58.790091+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/jsi18n/	7
-121	2017-05-05 13:50:02.460983+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/theme/homepage/2/	7
-122	2017-05-05 13:50:02.509291+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/jsi18n/	7
-123	2017-05-05 13:50:18.132463+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/pages/page/	7
-124	2017-05-05 13:50:22.057313+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/pages/richtextpage/3/	7
-125	2017-05-05 13:50:22.114237+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/jsi18n/	7
-126	2017-05-05 13:50:25.083021+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/pages/richtextpage/3/	7
-127	2017-05-05 13:50:25.130216+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/jsi18n/	7
-128	2017-05-05 13:50:51.812696+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/pages/page/	7
-129	2017-05-05 13:50:51.869842+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/jsi18n/	7
-130	2017-05-05 13:50:55.913616+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/pages/richtextpage/4/	7
-131	2017-05-05 13:50:55.961863+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/jsi18n/	7
-132	2017-05-05 13:51:00.778112+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/pages/page/	7
-133	2017-05-05 13:51:00.824155+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/jsi18n/	7
-134	2017-05-05 13:51:03.244391+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/pages/richtextpage/13/	7
-135	2017-05-05 13:51:03.291892+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/jsi18n/	7
-136	2017-05-05 13:51:10.798729+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/pages/page/	7
-137	2017-05-05 13:51:10.853857+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/jsi18n/	7
-138	2017-05-05 13:51:13.171674+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/pages/link/6/	7
-139	2017-05-05 13:51:13.224516+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/jsi18n/	7
-140	2017-05-05 13:52:11.917576+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/pages/page/	7
-141	2017-05-05 13:52:11.963161+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/jsi18n/	7
-142	2017-05-05 13:52:15.156689+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/pages/richtextpage/13/	7
-143	2017-05-05 13:52:15.20073+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/jsi18n/	7
-144	2017-05-05 13:52:18.172027+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/pages/page/	7
-145	2017-05-05 13:52:18.228086+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/jsi18n/	7
-146	2017-05-05 13:52:23.716799+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/pages/link/6/	7
-147	2017-05-05 13:52:23.763331+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/jsi18n/	7
-148	2017-05-05 13:52:27.949419+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/pages/page/	7
-149	2017-05-05 13:52:27.998948+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/jsi18n/	7
-150	2017-05-05 13:52:32.584181+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/pages/richtextpage/5/	7
-151	2017-05-05 13:52:32.632268+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/jsi18n/	7
-152	2017-05-05 13:52:35.036808+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/pages/page/	7
-153	2017-05-05 13:52:35.086548+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/jsi18n/	7
-154	2017-05-05 13:52:36.773666+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/pages/link/6/	7
-155	2017-05-05 13:52:36.817275+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/jsi18n/	7
-156	2017-05-05 13:52:42.024719+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/pages/page/	7
-157	2017-05-05 13:52:42.076119+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/jsi18n/	7
-158	2017-05-05 13:52:44.527298+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/pages/richtextpage/5/	7
-159	2017-05-05 13:52:44.585026+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/jsi18n/	7
-160	2017-05-05 13:52:48.292251+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/pages/page/	7
-161	2017-05-05 13:52:48.343992+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/jsi18n/	7
-162	2017-05-05 13:52:50.890654+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/pages/richtextpage/7/	7
-163	2017-05-05 13:52:50.94915+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/jsi18n/	7
-164	2017-05-05 13:54:23.795211+00	visit	2	user_ip=192.168.56.1 http_method=POST http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin_keywords_submit/	7
-165	2017-05-05 13:54:24.1916+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/pages/page/	7
-166	2017-05-05 13:54:24.243408+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/jsi18n/	7
-167	2017-05-05 13:54:27.799159+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/pages/richtextpage/7/	7
-168	2017-05-05 13:54:27.847815+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/jsi18n/	7
-169	2017-05-05 13:54:30.966698+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/pages/page/	7
-170	2017-05-05 13:54:31.020196+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/jsi18n/	7
-171	2017-05-05 13:54:33.427147+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/forms/form/8/	7
-172	2017-05-05 13:54:33.482389+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/jsi18n/	7
-173	2017-05-05 13:54:53.681968+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/pages/page/	7
-174	2017-05-05 13:54:53.737525+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/jsi18n/	7
-175	2017-05-05 13:55:06.963533+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/forms/form/8/	7
-176	2017-05-05 13:55:07.019789+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/jsi18n/	7
-177	2017-05-05 13:55:10.738828+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/pages/page/	7
-178	2017-05-05 13:55:21.129216+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/forms/form/8/	7
-179	2017-05-05 13:55:21.191685+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/jsi18n/	7
-180	2017-05-05 13:55:27.456913+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/pages/page/	7
-181	2017-05-05 13:55:27.509513+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/jsi18n/	7
-182	2017-05-05 13:55:30.011032+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/pages/richtextpage/9/	7
-183	2017-05-05 13:55:30.076627+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/jsi18n/	7
-184	2017-05-05 14:08:48.323384+00	visit	2	user_ip=192.168.56.1 http_method=POST http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin_keywords_submit/	7
-185	2017-05-05 14:08:48.670997+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/pages/page/	7
-186	2017-05-05 14:08:48.722271+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/jsi18n/	7
-187	2017-05-05 14:08:51.394672+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/pages/richtextpage/10/	7
-188	2017-05-05 14:08:51.445102+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/jsi18n/	7
-189	2017-05-05 14:13:10.126391+00	visit	2	user_ip=192.168.56.1 http_method=POST http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin_keywords_submit/	7
-190	2017-05-05 14:13:10.456163+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/pages/page/	7
-191	2017-05-05 14:13:10.522541+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/jsi18n/	7
-192	2017-05-05 14:13:15.837257+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/pages/richtextpage/9/	7
-193	2017-05-05 14:13:15.893944+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/jsi18n/	7
-194	2017-05-05 14:13:32.111637+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/pages/page/	7
-195	2017-05-05 14:13:32.170547+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/jsi18n/	7
-196	2017-05-05 14:13:35.372859+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/pages/richtextpage/11/	7
-197	2017-05-05 14:13:35.430437+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/jsi18n/	7
-198	2017-05-05 14:13:40.72414+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/pages/page/	7
-199	2017-05-05 14:13:40.788503+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/jsi18n/	7
-200	2017-05-05 14:13:42.511068+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/pages/richtextpage/12/	7
-201	2017-05-05 14:13:42.568646+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/jsi18n/	7
-202	2017-05-05 14:13:49.049127+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/sites/site/	7
-203	2017-05-05 14:13:49.098894+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/jsi18n/	7
-204	2017-05-05 14:13:51.688423+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/blog/blogpost/	7
-205	2017-05-05 14:13:51.731554+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/jsi18n/	7
-206	2017-05-05 14:13:53.299156+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/generic/threadedcomment/	7
-207	2017-05-05 14:13:53.343254+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/jsi18n/	7
-208	2017-05-05 14:13:54.951611+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/media-library/browse/	7
-209	2017-05-05 14:13:59.88942+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/media-library/rename/	7
-210	2017-05-05 14:14:03.117046+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/media-library/browse/	7
-211	2017-05-05 14:14:05.10835+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/media-library/browse/	7
-212	2017-05-05 14:14:07.920611+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/media-library/browse/	7
-213	2017-05-05 14:14:10.368129+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/sites/site/	7
-214	2017-05-05 14:14:10.417396+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/jsi18n/	7
-215	2017-05-05 14:14:15.042297+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/sites/site/1/	7
-216	2017-05-05 14:14:15.092063+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/jsi18n/	7
-217	2017-05-05 14:14:17.103009+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/sites/site/	7
-218	2017-05-05 14:14:18.451576+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/redirects/redirect/	7
-219	2017-05-05 14:14:18.493951+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/jsi18n/	7
-220	2017-05-05 14:14:20.809895+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/conf/setting/	7
-221	2017-05-05 14:14:20.854303+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/jsi18n/	7
-222	2017-05-05 14:15:16.638573+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/sites/site/	7
-223	2017-05-05 14:15:16.692813+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/jsi18n/	7
-224	2017-05-05 14:15:18.204349+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/redirects/redirect/	7
-225	2017-05-05 14:15:18.248944+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/jsi18n/	7
-226	2017-05-05 14:15:19.556301+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/conf/setting/	7
-227	2017-05-05 14:15:19.608698+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/jsi18n/	7
-228	2017-05-05 14:15:35.362452+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/auth/user/	7
-229	2017-05-05 14:15:35.417085+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/jsi18n/	7
-230	2017-05-05 14:15:42.01467+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/auth/user/4/	7
-231	2017-05-05 14:15:42.061876+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/jsi18n/	7
-232	2017-05-05 14:16:27.717945+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/auth/user/	7
-233	2017-05-05 14:16:27.766535+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/jsi18n/	7
-234	2017-05-05 14:16:29.228224+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/auth/group/	7
-235	2017-05-05 14:16:29.269878+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/jsi18n/	7
-236	2017-05-05 14:16:32.621664+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/auth/group/1/	7
-237	2017-05-05 14:16:32.668351+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/jsi18n/	7
-238	2017-05-05 14:16:51.613413+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/auth/group/	7
-239	2017-05-05 14:16:51.660561+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/jsi18n/	7
-240	2017-05-05 14:16:56.094141+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/auth/user/	7
-241	2017-05-05 14:16:56.136741+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/jsi18n/	7
-242	2017-05-05 14:17:00.824456+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/auth/group/	7
-243	2017-05-05 14:17:00.867035+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/jsi18n/	7
-244	2017-05-05 14:17:04.155813+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/auth/user/	7
-245	2017-05-05 14:17:04.205097+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/jsi18n/	7
-246	2017-05-05 14:17:07.493521+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/auth/user/4/	7
-247	2017-05-05 14:17:07.541823+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/jsi18n/	7
-248	2017-05-05 14:17:20.892518+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/auth/group/	7
-249	2017-05-05 14:17:20.94119+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/jsi18n/	7
-250	2017-05-05 14:17:23.582906+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/auth/group/1/	7
-251	2017-05-05 14:17:23.631642+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/jsi18n/	7
-252	2017-05-05 14:17:43.110817+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/auth/group/	7
-253	2017-05-05 14:17:43.157939+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/jsi18n/	7
-254	2017-05-05 14:17:45.500007+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/auth/user/	7
-255	2017-05-05 14:17:45.549392+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/jsi18n/	7
-256	2017-05-05 14:17:47.193115+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/auth/user/4/	7
-257	2017-05-05 14:17:47.244933+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/jsi18n/	7
-258	2017-05-05 14:18:01.971924+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/conf/setting/	7
-259	2017-05-05 14:18:02.022821+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/jsi18n/	7
-260	2017-05-05 14:18:13.815811+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/oauth2_provider/accesstoken/	7
-261	2017-05-05 14:18:13.864719+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/jsi18n/	7
-262	2017-05-05 14:18:16.504769+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/oauth2_provider/accesstoken/	7
-263	2017-05-05 14:18:16.542874+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/jsi18n/	7
-264	2017-05-05 14:18:19.346291+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/oauth2_provider/application/	7
-265	2017-05-05 14:18:19.393083+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/jsi18n/	7
-266	2017-05-05 14:18:20.854127+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/oauth2_provider/grant/	7
-267	2017-05-05 14:18:20.907772+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/jsi18n/	7
-268	2017-05-05 14:18:22.509487+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/oauth2_provider/refreshtoken/	7
-269	2017-05-05 14:18:22.55106+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/jsi18n/	7
-270	2017-05-05 14:18:25.098663+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/robots/rule/	7
-271	2017-05-05 14:18:25.141839+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/jsi18n/	7
-272	2017-05-05 14:18:27.347767+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/robots/rule/	7
-273	2017-05-05 14:18:27.386195+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/jsi18n/	7
-274	2017-05-05 14:18:29.161546+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/robots/url/	7
-275	2017-05-05 14:18:29.209823+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/jsi18n/	7
-276	2017-05-05 14:18:34.440133+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/security/cspreport/	7
-277	2017-05-05 14:18:34.481606+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/jsi18n/	7
-278	2017-05-05 14:18:38.079256+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/security/cspreport/	7
-279	2017-05-05 14:18:38.120411+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/jsi18n/	7
-280	2017-05-05 14:18:42.512666+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/security/passwordexpiry/	7
-281	2017-05-05 14:18:42.555206+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/jsi18n/	7
-282	2017-05-05 14:18:46.848188+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/theme/quotamessage/add/	7
-283	2017-05-05 14:18:46.896695+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/jsi18n/	7
-284	2017-05-05 14:20:45.609969+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/	7
-285	2017-05-05 14:20:51.229753+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/theme/quotamessage/1/	7
-286	2017-05-05 14:20:51.279809+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/jsi18n/	7
-287	2017-05-05 14:20:58.00192+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/theme/siteconfiguration/1/	7
-288	2017-05-05 14:20:58.045984+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/jsi18n/	7
-289	2017-05-05 14:21:04.996446+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/theme/userquota/	7
-290	2017-05-05 14:21:05.045538+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/jsi18n/	7
-291	2017-05-05 14:21:09.837984+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/theme/siteconfiguration/1/	7
-292	2017-05-05 14:21:09.893575+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/jsi18n/	7
-293	2017-05-05 14:24:29.356625+00	visit	2	user_ip=192.168.56.1 http_method=GET http_code=200 user_type=Unspecified user_email_domain=com request_url=/admin/	7
 \.
 
 
@@ -13162,7 +12948,7 @@ COPY hs_tracking_variable (id, "timestamp", name, type, value, session_id) FROM 
 -- Name: hs_tracking_variable_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('hs_tracking_variable_id_seq', 293, true);
+SELECT pg_catalog.setval('hs_tracking_variable_id_seq', 76, true);
 
 
 --
@@ -13176,7 +12962,6 @@ COPY hs_tracking_visitor (id, first_seen, user_id) FROM stdin;
 4	2017-02-02 17:23:27.980519+00	\N
 5	2017-02-02 17:27:56.524908+00	\N
 6	2017-02-02 17:28:40.809782+00	\N
-7	2017-05-05 13:43:41.849519+00	\N
 \.
 
 
@@ -13184,7 +12969,7 @@ COPY hs_tracking_visitor (id, first_seen, user_id) FROM stdin;
 -- Name: hs_tracking_visitor_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('hs_tracking_visitor_id_seq', 7, true);
+SELECT pg_catalog.setval('hs_tracking_visitor_id_seq', 6, true);
 
 
 --
@@ -14295,7 +14080,7 @@ ALTER TABLE ONLY hs_access_control_groupmembershiprequest
 
 
 --
--- Name: hs_access_control_groupresourcep_group_id_157babc573be246e_uniq; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+-- Name: hs_access_control_groupresourcep_group_id_157babc573be246e_uniq; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace:
 --
 
 ALTER TABLE ONLY hs_access_control_groupresourceprovenance
@@ -14319,7 +14104,7 @@ ALTER TABLE ONLY hs_access_control_groupresourceprivilege
 
 
 --
--- Name: hs_access_control_groupresourceprovenance_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+-- Name: hs_access_control_groupresourceprovenance_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace:
 --
 
 ALTER TABLE ONLY hs_access_control_groupresourceprovenance
@@ -14375,7 +14160,7 @@ ALTER TABLE ONLY hs_access_control_usergroupprivilege
 
 
 --
--- Name: hs_access_control_usergroupproven_user_id_548c10e220120a3e_uniq; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+-- Name: hs_access_control_usergroupproven_user_id_548c10e220120a3e_uniq; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace:
 --
 
 ALTER TABLE ONLY hs_access_control_usergroupprovenance
@@ -14383,7 +14168,7 @@ ALTER TABLE ONLY hs_access_control_usergroupprovenance
 
 
 --
--- Name: hs_access_control_usergroupprovenance_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+-- Name: hs_access_control_usergroupprovenance_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace:
 --
 
 ALTER TABLE ONLY hs_access_control_usergroupprovenance
@@ -14407,7 +14192,7 @@ ALTER TABLE ONLY hs_access_control_userresourceprivilege
 
 
 --
--- Name: hs_access_control_userresourcepro_user_id_52195a50359334ec_uniq; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+-- Name: hs_access_control_userresourcepro_user_id_52195a50359334ec_uniq; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace:
 --
 
 ALTER TABLE ONLY hs_access_control_userresourceprovenance
@@ -14415,7 +14200,7 @@ ALTER TABLE ONLY hs_access_control_userresourceprovenance
 
 
 --
--- Name: hs_access_control_userresourceprovenance_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+-- Name: hs_access_control_userresourceprovenance_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace:
 --
 
 ALTER TABLE ONLY hs_access_control_userresourceprovenance
@@ -14959,7 +14744,7 @@ ALTER TABLE ONLY hs_file_types_georasterlogicalfile
 
 
 --
--- Name: hs_file_types_netcdffilemetadata_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+-- Name: hs_file_types_netcdffilemetadata_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace:
 --
 
 ALTER TABLE ONLY hs_file_types_netcdffilemetadata
@@ -14967,7 +14752,7 @@ ALTER TABLE ONLY hs_file_types_netcdffilemetadata
 
 
 --
--- Name: hs_file_types_netcdflogicalfile_metadata_id_key; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+-- Name: hs_file_types_netcdflogicalfile_metadata_id_key; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace:
 --
 
 ALTER TABLE ONLY hs_file_types_netcdflogicalfile
@@ -14975,7 +14760,7 @@ ALTER TABLE ONLY hs_file_types_netcdflogicalfile
 
 
 --
--- Name: hs_file_types_netcdflogicalfile_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+-- Name: hs_file_types_netcdflogicalfile_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace:
 --
 
 ALTER TABLE ONLY hs_file_types_netcdflogicalfile
@@ -15975,7 +15760,7 @@ ALTER TABLE ONLY robots_url
 
 
 --
--- Name: security_cspreport_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+-- Name: security_cspreport_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace:
 --
 
 ALTER TABLE ONLY security_cspreport
@@ -15983,7 +15768,7 @@ ALTER TABLE ONLY security_cspreport
 
 
 --
--- Name: security_passwordexpiry_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+-- Name: security_passwordexpiry_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace:
 --
 
 ALTER TABLE ONLY security_passwordexpiry
@@ -15991,7 +15776,7 @@ ALTER TABLE ONLY security_passwordexpiry
 
 
 --
--- Name: security_passwordexpiry_user_id_key; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+-- Name: security_passwordexpiry_user_id_key; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace:
 --
 
 ALTER TABLE ONLY security_passwordexpiry
@@ -16015,7 +15800,7 @@ ALTER TABLE ONLY theme_iconbox
 
 
 --
--- Name: theme_quotamessage_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+-- Name: theme_quotamessage_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace:
 --
 
 ALTER TABLE ONLY theme_quotamessage
@@ -16047,7 +15832,7 @@ ALTER TABLE ONLY theme_userprofile
 
 
 --
--- Name: theme_userquota_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+-- Name: theme_userquota_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace:
 --
 
 ALTER TABLE ONLY theme_userquota
@@ -16055,7 +15840,7 @@ ALTER TABLE ONLY theme_userquota
 
 
 --
--- Name: theme_userquota_user_id_329a4f07aa9f15a4_uniq; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+-- Name: theme_userquota_user_id_329a4f07aa9f15a4_uniq; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace:
 --
 
 ALTER TABLE ONLY theme_userquota
@@ -16833,21 +16618,21 @@ CREATE INDEX hs_access_control_groupresourceprivilege_dc2a4728 ON hs_access_cont
 
 
 --
--- Name: hs_access_control_groupresourceprovenance_0e939a4f; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+-- Name: hs_access_control_groupresourceprovenance_0e939a4f; Type: INDEX; Schema: public; Owner: postgres; Tablespace:
 --
 
 CREATE INDEX hs_access_control_groupresourceprovenance_0e939a4f ON hs_access_control_groupresourceprovenance USING btree (group_id);
 
 
 --
--- Name: hs_access_control_groupresourceprovenance_7e847bf8; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+-- Name: hs_access_control_groupresourceprovenance_7e847bf8; Type: INDEX; Schema: public; Owner: postgres; Tablespace:
 --
 
 CREATE INDEX hs_access_control_groupresourceprovenance_7e847bf8 ON hs_access_control_groupresourceprovenance USING btree (grantor_id);
 
 
 --
--- Name: hs_access_control_groupresourceprovenance_e2f3ef5b; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+-- Name: hs_access_control_groupresourceprovenance_e2f3ef5b; Type: INDEX; Schema: public; Owner: postgres; Tablespace:
 --
 
 CREATE INDEX hs_access_control_groupresourceprovenance_e2f3ef5b ON hs_access_control_groupresourceprovenance USING btree (resource_id);
@@ -16875,21 +16660,21 @@ CREATE INDEX hs_access_control_usergroupprivilege_dc2a4728 ON hs_access_control_
 
 
 --
--- Name: hs_access_control_usergroupprovenance_0e939a4f; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+-- Name: hs_access_control_usergroupprovenance_0e939a4f; Type: INDEX; Schema: public; Owner: postgres; Tablespace:
 --
 
 CREATE INDEX hs_access_control_usergroupprovenance_0e939a4f ON hs_access_control_usergroupprovenance USING btree (group_id);
 
 
 --
--- Name: hs_access_control_usergroupprovenance_7e847bf8; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+-- Name: hs_access_control_usergroupprovenance_7e847bf8; Type: INDEX; Schema: public; Owner: postgres; Tablespace:
 --
 
 CREATE INDEX hs_access_control_usergroupprovenance_7e847bf8 ON hs_access_control_usergroupprovenance USING btree (grantor_id);
 
 
 --
--- Name: hs_access_control_usergroupprovenance_e8701ad4; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+-- Name: hs_access_control_usergroupprovenance_e8701ad4; Type: INDEX; Schema: public; Owner: postgres; Tablespace:
 --
 
 CREATE INDEX hs_access_control_usergroupprovenance_e8701ad4 ON hs_access_control_usergroupprovenance USING btree (user_id);
@@ -16917,21 +16702,21 @@ CREATE INDEX hs_access_control_userresourceprivilege_9e767b7c ON hs_access_contr
 
 
 --
--- Name: hs_access_control_userresourceprovenance_7e847bf8; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+-- Name: hs_access_control_userresourceprovenance_7e847bf8; Type: INDEX; Schema: public; Owner: postgres; Tablespace:
 --
 
 CREATE INDEX hs_access_control_userresourceprovenance_7e847bf8 ON hs_access_control_userresourceprovenance USING btree (grantor_id);
 
 
 --
--- Name: hs_access_control_userresourceprovenance_e2f3ef5b; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+-- Name: hs_access_control_userresourceprovenance_e2f3ef5b; Type: INDEX; Schema: public; Owner: postgres; Tablespace:
 --
 
 CREATE INDEX hs_access_control_userresourceprovenance_e2f3ef5b ON hs_access_control_userresourceprovenance USING btree (resource_id);
 
 
 --
--- Name: hs_access_control_userresourceprovenance_e8701ad4; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+-- Name: hs_access_control_userresourceprovenance_e8701ad4; Type: INDEX; Schema: public; Owner: postgres; Tablespace:
 --
 
 CREATE INDEX hs_access_control_userresourceprovenance_e8701ad4 ON hs_access_control_userresourceprovenance USING btree (user_id);
@@ -17946,7 +17731,7 @@ CREATE INDEX theme_siteconfiguration_9365d6e7 ON theme_siteconfiguration USING b
 
 
 --
--- Name: theme_userquota_e8701ad4; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+-- Name: theme_userquota_e8701ad4; Type: INDEX; Schema: public; Owner: postgres; Tablespace:
 --
 
 CREATE INDEX theme_userquota_e8701ad4 ON theme_userquota USING btree (user_id);
@@ -19877,42 +19662,42 @@ COMMENT ON DATABASE template1 IS 'default template for new databases';
 
 
 --
--- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner:
 --
 
 CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
 
 
 --
--- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner:
 --
 
 COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
 
 
 --
--- Name: hstore; Type: EXTENSION; Schema: -; Owner: 
+-- Name: hstore; Type: EXTENSION; Schema: -; Owner:
 --
 
 CREATE EXTENSION IF NOT EXISTS hstore WITH SCHEMA public;
 
 
 --
--- Name: EXTENSION hstore; Type: COMMENT; Schema: -; Owner: 
+-- Name: EXTENSION hstore; Type: COMMENT; Schema: -; Owner:
 --
 
 COMMENT ON EXTENSION hstore IS 'data type for storing sets of (key, value) pairs';
 
 
 --
--- Name: postgis; Type: EXTENSION; Schema: -; Owner: 
+-- Name: postgis; Type: EXTENSION; Schema: -; Owner:
 --
 
 CREATE EXTENSION IF NOT EXISTS postgis WITH SCHEMA public;
 
 
 --
--- Name: EXTENSION postgis; Type: COMMENT; Schema: -; Owner: 
+-- Name: EXTENSION postgis; Type: COMMENT; Schema: -; Owner:
 --
 
 COMMENT ON EXTENSION postgis IS 'PostGIS geometry, geography, and raster spatial types and functions';

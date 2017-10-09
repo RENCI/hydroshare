@@ -12,7 +12,7 @@ class Command(BaseCommand):
         resources = BaseResource.objects.all()
         for res in resources:
             try:
-                if not res.raccess.get_quota_holder():
+                if not res.get_quota_holder():
                     # if quota_holder is not set for the resource, set it to resource's creator
                     # for some resource, for some reason, the creator of the resource is not the
                     # owner, hence not allowed to be set as quota holder. This is an artifact that
@@ -29,14 +29,25 @@ class Command(BaseCommand):
                             # happen
                             print res.short_id + ' does not have an owner'
                             continue
-                    res.raccess.set_quota_holder(res.creator, res.creator)
-            except SessionException:
+                    res.set_quota_holder(res.creator, res.creator)
+            except SessionException as ex:
                 # this is needed for migration testing where some resources copied from www
                 # for testing do not exist in the iRODS backend, hence need to skip these
                 # test artifects
+                print(res.short_id + ' raised SessionException when setting quota holder: ' +
+                      ex.stderr)
                 continue
-            except AttributeError:
+            except AttributeError as ex:
                 # when federation is not set up correctly, istorage does not have a session
                 # attribute, hence raise AttributeError - ignore for testing and it should not
                 # happen in production where federation is set up properly
+                print(res.short_id + ' raised AttributeError when setting quota holder: ' +
+                      ex.message)
+                continue
+            except ValueError as ex:
+                # when federation is not set up correctly, istorage does not have a session
+                # attribute, hence raise AttributeError - ignore for testing and it should not
+                # happen in production where federation is set up properly
+                print(res.short_id + ' raised ValueError when setting quota holder: ' +
+                      ex.message)
                 continue

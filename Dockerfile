@@ -5,7 +5,10 @@ MAINTAINER Michael J. Stealey <stealey@renci.org>
 RUN pip install --upgrade pip && pip install \
   robot_detection \
   django-ipware \
-  django-test-without-migrations
+  django-test-without-migrations \
+  django-test-without-migrations \
+  django-rest-swagger \
+  jsonschema
 
 # Patch for Mezzanone 4.10 collecttemplates bugfix
 RUN echo -e "\
@@ -18,6 +21,8 @@ RUN echo -e "\
 " | patch /usr/local/lib/python2.7/site-packages/mezzanine/core/management/commands/collecttemplates.py -
 
 ### End - xDCIShare Development Image Additions ###
+
+### End - HydroShare Development Image Additions ###
 
 USER root
 WORKDIR /hydroshare
